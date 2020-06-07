@@ -5,8 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @date 20200602
  * @author 稻草鸟人
+ * @date 20200602
  */
 @SpringBootApplication
 @EnableBatchProcessing

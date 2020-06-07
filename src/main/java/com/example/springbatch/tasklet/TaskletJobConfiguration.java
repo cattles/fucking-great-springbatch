@@ -1,9 +1,8 @@
 package com.example.springbatch.tasklet;
 
+import com.example.springbatch.BaseJobConfiguration;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,18 +12,13 @@ import org.springframework.context.annotation.Configuration;
  * @date 2020/5/31 下午11:23
  */
 @Configuration
-public class TaskletJobConfiguration {
+public class TaskletJobConfiguration extends BaseJobConfiguration {
 
-    @Autowired
-    private JobBuilderFactory jobs;
-
-    @Autowired
-    private StepBuilderFactory steps;
 
     @Autowired
     InterceptingJobExecution interceptingJobExecution;
 
-    @Bean
+    @Bean(name = "taskletJob")
     public Job taskletJob() {
         return this.jobs.get("taskletJob")
                 .start(step()).listener(interceptingJobExecution)
