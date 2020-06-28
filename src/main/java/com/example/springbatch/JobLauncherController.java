@@ -33,6 +33,9 @@ public class JobLauncherController {
     @Resource(name = "parallelJob")
     Job parallelJob;
 
+//    @Resource(name = "remoteChunkingJob")
+//    Job remoteChunkingJob;
+
     @RequestMapping("/launchjob")
     public String handle() throws Exception {
         String parameter = UUID.randomUUID().toString();
@@ -64,6 +67,21 @@ public class JobLauncherController {
         String parameter = UUID.randomUUID().toString();
         try {
             jobLauncher.run(parallelJob, new JobParameters());
+        } catch (Exception e) {
+            log.error("", e);
+        }
+
+        return parameter;
+    }
+
+    @RequestMapping("/launchRemoteChunkingJob")
+    public String launchRemoteChunkingJob() throws Exception {
+        String parameter = UUID.randomUUID().toString();
+        try {
+            JobParameters jobParameters = new JobParametersBuilder().addString("message", "Welcome To Spring Batch World!" + parameter)
+                    .toJobParameters();
+            Job remoteChunkingJob = SpringUtils.getBean("remoteChunkingJob");
+            jobLauncher.run(remoteChunkingJob, jobParameters);
         } catch (Exception e) {
             log.error("", e);
         }

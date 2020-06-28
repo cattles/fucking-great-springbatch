@@ -1,10 +1,8 @@
 package com.example.springbatch.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -16,7 +14,10 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Transaction {
+@ToString
+public class Transaction implements Serializable {
+
+    private static final long serialVersionUID = 5262632823464033258L;
 
     private String account;
 
